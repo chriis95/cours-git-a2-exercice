@@ -15,11 +15,13 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 	if(!empty($_POST['email']) && !empty($_POST['password'])){
 
 		// TODO
-
-		// Force user connection to access dashboard
-		userConnection($db, 'git@initiation.com', 'password');
-		
-		header('Location: dashboard.php');
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		if (userConnection($db, $email, $password)) {
+			header('Location: dashboard.php');
+		}else{
+			$error = 'Nop !';
+		}
 
 	}else{
 		$error = 'Champs requis !';
